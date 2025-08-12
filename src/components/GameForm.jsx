@@ -63,36 +63,38 @@ function GameForm({ onAddGame }) {
       <div className="card-body">
         <form onSubmit={handleSubmit}>
           <div className="d-flex justify-content-between align-items-start gap-2">
-            <div>
-              <label htmlFor="title" className="visually-hidden">
-                Title:
-              </label>
+            <div className="flex-grow-1">
               <input
                 value={game.title}
                 type="text"
                 name="title"
                 id="title"
-                className="form-control flex-grow-1"
+                className="form-control"
                 placeholder="Title"
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
+              <label htmlFor="title" className="visually-hidden">
+                Title:
+              </label>
               {errors.title && (
                 <span className="form-text text-warning">{errors.title}</span>
               )}
-              <label htmlFor="platform" className="visually-hidden">
-                Platform:
-              </label>
+            </div>
+            <div className="flex-grow-1">
               <input
                 value={game.platform}
                 type="text"
                 name="platform"
                 id="platform"
-                className="form-control flex-grow-1"
+                className="form-control"
                 placeholder="Platform"
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
+              <label htmlFor="platform" className="visually-hidden">
+                Platform:
+              </label>
               {errors.platform && (
                 <span className="form-text text-warning">
                   {errors.platform}
