@@ -3,7 +3,7 @@ import { useState } from 'react';
 const blankGame = { title: '', platform: '' };
 const blankErrors = { title: '', platform: '' };
 
-function GameForm() {
+function GameForm({ onAddGame }) {
   const [game, setGame] = useState(blankGame);
   const [errors, setErrors] = useState(blankErrors);
 
@@ -45,7 +45,15 @@ function GameForm() {
     e.preventDefault();
     setErrors(blankErrors);
 
-    console.log(game);
+    const newGame = {
+      id: crypto.randomUUID(),
+      title: game.title,
+      platform: game.platform,
+      isComplete: false,
+    };
+
+    onAddGame(newGame);
+    setGame(blankGame);
   };
 
   const isFormValid = errors.title === '' && errors.platform === '';
@@ -54,7 +62,7 @@ function GameForm() {
     <div className="card shadow mb-3">
       <div className="card-body">
         <form onSubmit={handleSubmit}>
-          <div className="d-flex justify-content-between align-items-center gap-2">
+          <div className="d-flex justify-content-between align-items-start gap-2">
             <div>
               <label htmlFor="title" className="visually-hidden">
                 Title:
@@ -72,8 +80,6 @@ function GameForm() {
               {errors.title && (
                 <span className="form-text text-warning">{errors.title}</span>
               )}
-            </div>
-            <div>
               <label htmlFor="platform" className="visually-hidden">
                 Platform:
               </label>
